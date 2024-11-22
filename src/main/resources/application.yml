@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: order
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: order-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 3
+  cache:
+    type: redis
+    redis:
+      host: localhost
+      port: 6379
+      time-to-live: 600000
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mouts
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show-sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
