@@ -13,6 +13,7 @@ public class OrderConsumer {
 
     private final OrderService orderService;
 
+    @KafkaListener(topics = "order-topic", groupId = "order-group", containerFactory = "kafkaListenerContainerFactory")
     public void consume(String message) {
         IncomingOrderDTO order = convertJsonToOrder(message);
         processOrder(order);
